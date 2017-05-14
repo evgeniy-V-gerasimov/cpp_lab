@@ -1,11 +1,19 @@
 #include <iostream> // std::cout std::cin std::endl
 #include <iomanip> // std::boolalpha
+#include <functional> // std::function
 
+char getChar(int&);	//forward declaration of function getChar
 int addNumber(int copyInput){ 	// pass by value
 	return copyInput + 13;
 }
-double addNumber(double copyInput){
+double addNumber(double copyInput){	// function overloading
 	return copyInput + 13.3;
+}
+//void f_callback(const int& cvar, char (*f_ptr)(int&) = &getChar) {
+void f_callback(const int& cvar, std::function<char(int&)> f_ptr = getChar) {  
+	for(int i = 1; i < cvar; i++){
+        std::cout << f_ptr(i) << std::endl;
+    }
 }
 void modifyParam(int& param1, int& param2){ 	// pass by Lvalue reference
 	param1 = param2 + 8;
@@ -17,15 +25,11 @@ bool isValid(int&& param){	// pass by Rvalue reference
 char getChar(int& ch) {
 	return ch;
 }
-template<typename T>
+template<typename T>	// function template
 void setToZero(T& param){
 	param = 0;
 }
-void f_callback(const int& cvar, char (*f_ptr)(int&) = &getChar) {
-    for(int i = 1; i < cvar; i++){
-        std::cout << f_ptr(i) << std::endl;
-    }
-}
+
 int main(int argc, char **argv)
 {
 	auto input { 0 };
