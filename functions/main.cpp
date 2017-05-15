@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 	(*function_ptr)(input, value);
 	std::cout << "input = " << input << "  value = " << value << std::endl;
 	std::cout <<  std::boolalpha << isValid(addNumber(input)) << std::endl;
-	setToZero(value); // type deduced - int&
+	setToZero(value);
 	std::cout << "value = " << value << std::endl;
 	f_callback(5);
 	f_callback(5, [](int& value)->char{std::cout << "lambda";return value;});
