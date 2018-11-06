@@ -16,22 +16,28 @@ int main(int argc, char** argv) {
 
 // Member functions:
 //
+// Ctor #1
 //explicit map( const Allocator& alloc );
 std::map<int, std::string> mc1;
 std::map<int, std::string> mct;
 
+// Ctor #2
 //template< class InputIterator > 
 //map( InputIterator first, InputIterator last, const Allocator& alloc );
 std::vector<std::pair<int,std::string>> v1 {{42,"boo"}, {1,"foo"}, {255,"zoo"}};
 std::map<int, std::string> mc2(v1.begin(), v1.end());
 
+// Ctor #3
 //map( const map& other, const Allocator& alloc );
 std::map<int, std::string> mc3(mc2);
 
-//map( map&& other, const Allocator& alloc );
-std::map<int, std::string> t(v1.begin(), v1.end());
-std::map<int, std::string> mc4(std::move(t));
 
+std::map<int, std::string> temp(v1.begin(), v1.end());
+// Ctor #4
+//map( map&& other, const Allocator& alloc );
+std::map<int, std::string> mc4(std::move(temp));
+
+// Ctor #5
 //map( std::initializer_list<value_type> init, const Allocator& );
 std::map<int, std::string> mc5 {{12,"baz"}, {3,"foo"}, {77,"bar"}};
 
@@ -333,7 +339,7 @@ std::map<int, std::string> mc5 {{12,"baz"}, {3,"foo"}, {77,"bar"}};
 if (mc2 == mct) std::cout << "mc2 and mct are equal\n";
 if (mc2 != mct) std::cout << "mc2 and mct are not equal\n";
 if (mc2 <  mct) std::cout << "mc2 is less than mct\n";
-if (mc2 <= mct)	std::cout << "mc2 is less than or equal to mct\n";
+if (mc2 <= mct) std::cout << "mc2 is less than or equal to mct\n";
 if (mc2 >  mct) std::cout << "mc2 is greater than mct\n";
 if (mc2 >= mct) std::cout << "mc2 is greater than or equal to mct\n";
 
